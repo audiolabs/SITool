@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="main">
+        <div id="infoCont">
+            <h1 id="header">{{home_header}}</h1>
+            <h2 id="info">{{home_info}}</h2>
+        </div>
+	<div class="consent-form">
+            <h2 align="center">Consent Form</h2>
+            <p align="left">{{consent_info|safe}}</p>
+            <form method="POST" action="/demographic">
+                <label>
+            <input type="checkbox" name="consent" value="yes" required>
+                I agree to participate
+             </label><br><br>
+            <button type="submit">Submit</button>
+        </form>
+         </div>
+    </div>
+
+    <a href="http://www.iis.fraunhofer.de/" class="logo-link">
+        <img src="{{ url_for('static', filename='images/iis.svg') }}" class="logo" />
+    </a>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+	    overflow-y: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure at least full viewport height */
+            font-family: sans-serif; /* Adjust font family as needed */
+            position: relative; /* Needed for absolute positioning */
+            background-color: #f0f0f0;
+        }
+
+	button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #main {
+            flex: 1; /* Ensure content takes remaining vertical space */
+            max-width: 1000px; /* Ensure main container does not exceed viewport width */
+            margin:  auto; /* Center the main container */
+            padding: 0px;
+        }
+        #infoCont {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+	.consent-form {
+        max-width: 1200px; /* Set maximum width */
+        width: 100%; /* Full width inside the max-width */
+        max-height: 450px; /* Set maximum height */
+        overflow-y: auto; /* Allow scrolling if content overflows */
+        margin: auto;
+        margin-top: auto;
+        padding: 10px;
+        border: 1px solid #ccc; /* Border around the box */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+        background-color: #fff; /* White background for the box */
+    }
+        #header {
+            color: #088F8F;
+            font-size: xx-large;
+        }
+        #info {
+            color: black;
+            font-size: x-large;
+            margin-top: 20px;
+        }
+        #input {
+            display: flex;
+            justify-content: center;
+        }
+        #form {
+            width: 80%;
+            max-width: 800px; /* Ensure form does not exceed viewport width */
+            background-color: #e3e3e3;
+            padding: 20px;
+            border-radius: 2rem;
+            border: 2px solid hsl(0, 0%, 90%);
+        }
+        #form p {
+            margin: 1rem 0;
+        }
+        #submit {
+            display: block;
+            margin: 20px auto;
+        }
+        #warning {
+            text-align: center;
+            margin-top: 20px;
+            color: red;
+        }
+        .logo-link {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10; /* Ensure logo is above other content */
+        }
+        .logo {
+            height: 50px; /* Adjust height as needed */
+            width: auto;
+        }
+    </style>
+{% endblock content %}

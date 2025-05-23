@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+   <form action="/" id="returnHome" method = "POST" name="completed">
+        <h>DANKE FÜR IHRE TEILNAHME :)
+            Der Hörtest ist abgeschlossen, und die Leistung ist gespeichert! Ihr eindeutiger Code zum Abschluss der Umfrage lautet: <span style="color: green; font-weight: bold;">{{ completion_code }}</span></h>
+        <p><input class="button"  type = "submit" value = "Return Home" /></p>
+   </form>
+   <a href="http://www.iis.fraunhofer.de/" class="logo-link">
+        <img src="{{ url_for('static', filename='images/iis.svg') }}" class="logo" />
+    </a>
+   <style>
+       body {
+           margin: 0;
+           padding: 0;
+           overflow-x: hidden; /* Prevent horizontal scrollbar */
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           min-height: 100vh; /* Ensure at least full viewport height */
+           font-family: sans-serif; /* Adjust font family as needed */
+           background-color: #f0f0f0;
+       }
+       #returnHome {
+           color: black;
+           font-size: large;
+           width: 700px;
+           background-color: #e3e3e3;
+           box-sizing: content-box;
+           padding: 2rem;
+           border-radius: 2rem;
+           border: 2px solid hsl(0, 0%, 90%);
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 2rem;
+       }
+       .logo-link {
+           position: absolute;
+           bottom: 20px;
+           right: 20px;
+           z-index: 10; /* Ensure logo is above other content */
+       }
+       .logo {
+           height: 50px; /* Adjust height as needed */
+           width: auto;
+       }
+   </style>
+{% endblock content %}

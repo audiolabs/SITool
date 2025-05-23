@@ -1,0 +1,50 @@
+testName: DRT TEST
+
+language : en
+testIterations : 2
+numberOfConditions : 2
+testItemNumber : 6
+trapQuestions : 2
+
+trialIterations: 1
+trialItemNumber: 2
+trialCondition: condition1
+trialAudioDirectory: /static/speechFiles/DRT/English
+
+conditions:
+  - condition1
+  - condition2
+
+answer_dir : Results_DRT/
+
+consent_info : |
+  <p>With your consent, you agree to participate in the study “Diagnostic Rhyme Test”.</p>
+  <p>I agree that you may, for the purpose of carrying out, evaluating and presenting the above study, collect the following personal data from me </p>
+  <ul>
+    <li>Name</li>
+    <li>Age</li>
+    <li>Gender</li>
+    <li>Nationality</li>
+  </ul>
+
+break: True
+
+LanguageProficiency:
+  audioDirectory: speechFiles/language_proficiency
+  imageDirectory: images/language_proficiency
+  questions: ["Where does the man suggest going on holiday?", "Which animal did the children enjoy seeing most?", "How did they travel to France?", "What does the boy want to borrow now?", "What is the girl going to do this weekend?"]
+  correctResponse: ["test1_3.png", "test2_3.png", "test3_1.png", "test4_2.png", "test5_1.png"]
+  maxIncorrectAnswers: 1
+
+DRT:
+  wordItemDirectory : RhymeTest_webApp/static/drt_wrdlst_example.txt
+  audioDirectory:
+    - /static/speechFiles/DRT/English
+    - /static/speechFiles/DRT/English
+
+  instructions:
+    - Once you play the audio, please listen to it till the end! You will not be given a second chance to listen.
+    - Select the word that was played after you listen to it.
+    - Once you select the word, you will be given the next set of words and the next audio clip.
+
+

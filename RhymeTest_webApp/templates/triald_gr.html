@@ -1,0 +1,217 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if ends == True %}
+    <div id="main">
+        <p id="result"> Ihre Leistung für Probe: {{performance}}%</p>
+        <div id="start">
+            <form action="/test" method="POST" name="startTest">
+                <h id='info'>{{info}}</h>
+                <p><input class="button" id='submit' type="submit" value="{{buttonName}}" /></p>
+            </form>
+        </div>
+    </div>
+    <a href="http://www.iis.fraunhofer.de/" class="logo-link">
+        <img src="{{ url_for('static', filename='images/iis.svg') }}" class="logo" />
+    </a>
+    <style>
+        body {
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        #result {
+            font-size: x-large;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #start {
+            color: black;
+            font-size: large;
+            background-color: #e3e3e3;
+            box-sizing: content-box;
+            padding: 2rem;
+            border-radius: 2rem;
+            border: 2px solid hsl(0, 0%, 90%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #submit {
+            margin-top: 20px;
+        }
+        #info {
+            font-size: large;
+        }
+        .logo-link {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10; /* Ensure logo is above other content */
+        }
+        .logo {
+            height: 50px; /* Adjust height as needed */
+            width: auto;
+        }
+    </style>
+{% else %}
+    <body onload="load()">
+        <div id="mainCont" class="w3-container">
+            <p id="testN">{{test}}</p>
+            <div id="audioCont" class="w3-container">
+                <p id="track">{{currentItem}}/{{overall}}</p>
+                <figure>
+                    <audio class="audio-player"
+                           controls='controls'
+                           preload="auto"
+                           controlsList="nodownload noplaybackrate"
+                           id="player"
+                           type="audio/wav"
+                           src="{{audioDirectory}}">
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+                </figure>
+            </div>
+            <div id="formCont">
+                <form action="/trial?f=0" id="one" method="POST" name="item0">
+                    <p3><input class="button1" name="item0" role="button" type="submit" value="{{item[0]}}" /></p3>
+                </form>
+                <form action="/trial?f=1" id="two" method="POST" name="item1">
+                    <p3><input class="button1" name="item1" role="button" type="submit" value="{{item[1]}}" /></p3>
+                </form>
+            </div>
+        </div>
+        <a href="http://www.iis.fraunhofer.de/" class="logo-link">
+        <img src="static/images/iis.svg" class="logo" />
+        </a>
+        <script>
+            var time_instances = [];
+            var instant = 0;
+            var click = 0;
+
+            function load() {
+                time_instances.length = 0;
+                instant = 0;
+                click = 0;
+            }
+
+            var player = document.getElementById("player");
+            player.addEventListener('play', function () {
+                click += 1;
+                instant = player.currentTime;
+                time_instances.push(instant);
+                if (click > 1) {
+                    if (time_instances[1] === 0) {
+                        player.pause();
+                        player.muted = true;
+                    }
+                    if (arrayMax(time_instances) > instant) {
+                        player.pause();
+                        player.muted = true;
+                    }
+                }
+            });
+
+            window.addEventListener('keydown', function (event) {
+                var key = event.which || event.keyCode;
+                if (key === 32) { // space
+                    event.preventDefault();
+                    player.paused ? player.play() : player.pause();
+                }
+            });
+
+            function arrayMax(arr) {
+                var len = arr.length, max = -Infinity;
+                while (len--) {
+                    if (arr[len] > max) {
+                        max = arr[len];
+                    }
+                }
+                return max;
+            }
+        </script>
+        <style>
+            body {
+                overflow-x: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f0f0f0;
+            }
+            #mainCont {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+            #audioCont {
+                width: 400px;
+                margin-top: 20px;
+            }
+            #track {
+                font-size: large;
+                margin-bottom: 10px;
+            }
+            #testN {
+                font-size: x-large;
+                margin-bottom: 20px;
+            }
+            #formCont {
+                display: flex;
+                justify-content: space-between;
+                width: 400px;
+                margin-top: 20px;
+            }
+	    .button1 {
+	    font-size: 1.5em;       /* Larger font size */
+            padding: 10px 20px;     /* Increase padding for larger button area */
+            width: 200px;           /* Set a fixed width if desired */
+            height: 50px;           /* Set a fixed height if desired */
+            }
+
+            .audio-player {
+                width: 100%;
+                box-shadow: 0 0 20px 0 #000a;
+                font-family: sans-serif;
+                color: white;
+                font-size: 0.75em;
+            }
+            #one {
+                flex: 1;
+                margin-right: 10px;
+            }
+            #two {
+                flex: 1;
+                margin-left: 10px;
+            }
+            .logo-link {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10; /* Ensure logo is above other content */
+            }
+            .logo {
+            height: 50px; /* Adjust height as needed */
+            width: auto;
+            }
+        </style>
+{% endif %}
+{% endblock content %}

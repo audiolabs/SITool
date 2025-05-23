@@ -1,0 +1,43 @@
+testName: DRT TEST
+
+language : gr
+testIterations : 2
+numberOfConditions : 2
+testItemNumber : 6
+trapQuestions : 2
+
+trialIterations: 1
+trialItemNumber: 2
+trialCondition: condition1
+trialAudioDirectory: /static/speechFiles/DRT/German
+
+conditions:
+  - condition1
+  - condition2
+
+answer_dir : Results_DRT/
+
+consent_info : |
+  <p>Mit Ihrer Einwilligung erklären Sie sich bereit, an der Studie "Diagnostischer Reimtest" teilzunehmen.</p>
+  <p>Ich bin damit einverstanden, dass Sie zum Zwecke der Durchführung, Auswertung und Darstellung der oben genannten Studie folgende personenbezogene Daten von mir erheben dürfen </p>
+  <ul>
+    <li>Name</li>
+    <li>Alter</li>
+    <li>Geschlecht</li>
+    <li>Sprachkenntnisse</li>
+  </ul>
+
+break: False
+
+DRT:
+  wordItemDirectory : RhymeTest_webApp/static/drt_wrdlst_example_gr.txt
+  audioDirectory:
+    - /static/speechFiles/DRT/German
+    - /static/speechFiles/DRT/German
+
+  instructions:
+    - Wenn Sie die Audiodatei abspielen, hören Sie sie bitte bis zum Ende an! Audiodateien können nur einmal abgespielt werden.
+    - Nach dem Anhören, wählen sie das gehörte Wort aus.
+    - Sobald Sie das Wort ausgewählt haben, erhalten Sie das nächste Wortpaar und die nächste Audiodatei.
+    - Sie können bei Bedarf kurze Pausen einlegen.
+

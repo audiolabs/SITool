@@ -1,0 +1,3 @@
+Test Number, Trial Number, Item Index, Word Index, Condition, Correct Answer, Answer
+1, 0, 2, 1, condition1, DECK, DECK
+1, 1, 1, 0, condition1, POND, BOND

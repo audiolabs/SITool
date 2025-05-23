@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="main">
+        <h1>{{home_header}}</h1>
+        <p align="center">Bitte geben Sie hier Ihre Daten ein!</p>
+        <div id="input">
+            <form id="form" autocomplete="off" action="{{ url_for('main.initialize') }}" method="POST">
+                <p id="nameField">Ihr Name: <input type="text" name="name" size="50" /></p>
+                <p id="idField">Ihr ID: <input type="text" name="userid" size="50" /></p>
+                <p id="ageField">Ihr Alter: <input type="number" name="age" max="100" size="50" /></p>
+                <p id="gendField">Geschlecht:
+                    <label for="gender"></label>
+                    <select name="gender" id="gender">
+                        <option value="Female">Weiblich</option>
+                        <option value="Male">Männlich</option>
+                        <option value="Other">diverse</option>
+			<option value="Not specified">keine Angabe</option>
+                    </select>
+                </p>
+                <p id="langField">Sind Sie muttersprachlich deutsch?:
+                    <label for="lang"></label>
+                    <select name="lang" id="lang">
+                        <option value="yes">Ja</option>
+                        <option value="No, beginner">Nein, Einsteigerniveau</option>
+                        <option value="No, intermediate">Nein, mittleres Niveau</option>
+                        <option value="No, Advanced">Nein,fortgeschrittenes Niveau</option>
+                    </select>
+                </p>
+                <p><input id="submit" class="button" role="button" type="submit" value="Einreichen" /></p>
+                <p id="warning">{{info}}</p>
+            </form>
+        </div>
+    </div>
+
+    <a href="http://www.iis.fraunhofer.de/" class="logo-link">
+        <img src="{{ url_for('static', filename='images/iis.svg') }}" class="logo" />
+    </a>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure at least full viewport height */
+            font-family: sans-serif; /* Adjust font family as needed */
+            position: relative; /* Needed for absolute positioning */
+            background-color: #f0f0f0;
+        }
+        #main {
+            flex: 1; /* Ensure content takes remaining vertical space */
+            max-width: 1000px; /* Ensure main container does not exceed viewport width */
+            margin: 100px auto; /* Center the main container */
+            padding: 20px;
+        }
+        #main h1 {
+        color: #088F8F;
+        font-size: xx-large;
+        text-align: center; /* Centers the heading within the div */
+        margin-top: 0; /* Reduces top margin if needed */
+        }
+        #infoCont {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        #header {
+            color: #088F8F;
+            font-size: xx-large;
+        }
+        #info {
+            color: black;
+            font-size: x-large;
+            margin-top: 20px;
+        }
+        #input {
+            display: flex;
+            justify-content: center;
+        }
+        #form {
+            width: 80%;
+            max-width: 800px; /* Ensure form does not exceed viewport width */
+            background-color: #e3e3e3;
+            padding: 20px;
+            border-radius: 2rem;
+            border: 2px solid hsl(0, 0%, 90%);
+        }
+        #form p {
+            margin: 1rem 0;
+        }
+        #submit {
+            display: block;
+            margin: 20px auto;
+        }
+        #warning {
+            text-align: center;
+            margin-top: 20px;
+            color: red;
+        }
+        .logo-link {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10; /* Ensure logo is above other content */
+        }
+        .logo {
+            height: 50px; /* Adjust height as needed */
+            width: auto;
+        }
+    </style>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+
+<div id="main">
+    <div id="content-container">
+        <div id="instruction">
+            <h1 id="title" style="color: #088F8F;">Language Proficiency Test Instructions</h1>
+            <p>Welcome to the Language Proficiency Test. In this test, you will listen to an audio clip and then select the image that best corresponds to what you heard.</p>
+
+            <p><strong>Instructions:</strong></p>
+            <ul id="list">
+                <li>Click the "Start Test" button below to begin the test.</li>
+                <li>Each question will consist of an audio clip followed by 3 images.</li>
+                <li>Listen carefully to the audio and click on the image that matches what you heard.</li>
+                <li>You have a limited number of incorrect answers allowed. Make sure to answer correctly to proceed.</li>
+            </ul>
+
+            <p>Once you're ready, click the "Start Test" button to begin.</p>
+        </div>
+        <div id="start">
+            <form action="{{ url_for('main.language_proficiency', test_number=1) }}" method="GET">
+                <p><input class="button" id="submit" type="submit" value="Start Test" /></p>
+            </form>
+        </div>
+    </div>
+</div>
+<a href="http://www.iis.fraunhofer.de/" class="logo-link">
+    <img src="{{ url_for('static', filename='images/iis.svg') }}" class="logo" />
+</a>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevent horizontal scrollbar */
+        font-family: sans-serif; /* Example font family, adjust as needed */
+        background-color: #f0f0f0; /* Example background color, adjust as needed */
+        font-size: large;
+    }
+    #main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Ensure full viewport height */
+    }
+    #content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 800px; /* Adjust max-width as needed */
+        padding: 20px;
+        background-color: #e3e3e3;
+        border-radius: 2rem;
+        border: 2px solid hsl(0, 0%, 90%);
+    }
+    #instruction {
+        margin-bottom: 20px;
+    }
+    #start {
+        text-align: center;
+    }
+    #title {
+        text-align: center;
+        color: #FF6314;
+        font-size: xx-large;
+        margin-bottom: 10px;
+    }
+    #list {
+        list-style-type: disc;
+        padding-left: 20px;
+        font-size: large;
+    }
+    #submit {
+        margin-top: 10px;
+        color: #088F8F;
+    }
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #088F8F;
+    }
+    .logo-link {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        z-index: 10; /* Ensure logo is above other content */
+    }
+    .logo {
+        height: 50px; /* Adjust height as needed */
+        width: auto;
+    }
+</style>
+{% endblock content %}

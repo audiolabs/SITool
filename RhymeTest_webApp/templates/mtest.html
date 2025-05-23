@@ -1,0 +1,221 @@
+{% extends "layout.html" %}
+{% block content %}
+<body onload="load()">
+    <div id="mainCont" class="w3-container">
+        <p id="testN">{{ test }}</p>
+        <div id="audioCont" class="w3-container">
+            <p id="testNum">Test Number: {{ test_number }}/{{ numberOfConditions }}</p>
+            <p id="track">{{ currentItem }}/{{ overall }}</p>
+            <figure>
+                <audio class="audio-player" controls="controls" preload="auto" controlsList="nodownload noplaybackrate" id="player" type="audio/wav" src="{{ audioDirectory }}">
+                    Your browser does not support the <code>audio</code> element.
+                </audio>
+            </figure>
+        </div>
+        <div id="formCont">
+            <form action="/test?f=0" method="POST" name="item0">
+                <input class="button1" name="item0" role="button" type="submit" value="{{ item[0] }}" />
+            </form>
+            <form action="/test?f=1" method="POST" name="item1">
+                <input class="button1" name="item1" role="button" type="submit" value="{{ item[1] }}" />
+            </form>
+            <form action="/test?f=2" method="POST" name="item2">
+                <input class="button1" name="item2" role="button" type="submit" value="{{ item[2] }}" />
+            </form>
+            <form action="/test?f=3" method="POST" name="item3">
+                <input class="button1" name="item3" role="button" type="submit" value="{{ item[3] }}" />
+            </form>
+            <form action="/test?f=4" method="POST" name="item4">
+                <input class="button1" name="item4" role="button" type="submit" value="{{ item[4] }}" />
+            </form>
+            <form action="/test?f=5" method="POST" name="item5">
+                <input class="button1" name="item5" role="button" type="submit" value="{{ item[5] }}" />
+            </form>
+        </div>
+        {% if show_timer %}
+            <div id="timerOverlay" class="overlay">
+                <div class="timer-content">
+                    <p>Take a Break!</p>
+                    <span id="countdown">5:00</span>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <a href="http://www.iis.fraunhofer.de/" class="logo-link">
+        <img src="{{ url_for('static', filename='images/iis.svg') }}" class="logo" />
+    </a>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+        }
+
+        #mainCont {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #testN {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        #testNum, #track {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        #audioCont {
+            margin: 20px 0;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .audio-player {
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #formCont {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .button1 {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+        }
+
+        .logo-link {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        /* Overlay styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensure it's on top */
+            color: #fff;
+            font-size: 3em;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .timer-content p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        #countdown {
+            font-weight: bold;
+            font-size: 2em;
+        }
+    </style>
+
+    <script>
+        var time_instances = [];
+        var instant = 0;
+        var click = 0;
+
+        function load() {
+            time_instances.length = 0;
+            instant = 0;
+            click = 0;
+
+            {% if show_timer %}
+            startCountdown(5 * 60); // Start the countdown if show_timer is True
+            {% endif %}
+        }
+
+        var player = document.getElementById("player");
+        player.addEventListener('play', function () {
+            click += 1;
+            instant = player.currentTime;
+            time_instances.push(instant);
+            if (click > 1) {
+                if (time_instances[1] === 0) {
+                    player.pause();
+                    player.muted = true;
+                }
+                if (arrayMax(time_instances) > instant) {
+                    player.pause();
+                    player.muted = true;
+                }
+            }
+        });
+
+        window.addEventListener('keydown', function (event) {
+            var key = event.which || event.keyCode;
+            if (key === 32) {
+                event.preventDefault();
+                player.paused ? player.play() : player.pause();
+            }
+        });
+
+        function arrayMax(arr) {
+            var len = arr.length, max = -Infinity;
+            while (len--) {
+                if (arr[len] > max) {
+                    max = arr[len];
+                }
+            }
+            return max;
+        }
+
+        function startCountdown(durationInSeconds) {
+            var countdownElement = document.getElementById("countdown");
+            var overlay = document.getElementById("timerOverlay");
+
+            var remainingTime = durationInSeconds;
+            var countdownInterval = setInterval(function () {
+                var minutes = Math.floor(remainingTime / 60);
+                var seconds = remainingTime % 60;
+
+                // Format seconds to always display two digits
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                // Update the countdown display
+                countdownElement.textContent = minutes + ":" + seconds;
+
+                // If time runs out
+                if (remainingTime <= 0) {
+                    clearInterval(countdownInterval);
+                    overlay.style.display = "none"; // Hide the overlay
+                }
+
+                remainingTime--;
+            }, 1000);
+        }
+    </script>
+</body>
+{% endblock content %}

@@ -1,0 +1,4 @@
+Test Number, Trial Number, Item Index, Word Index, Condition, Correct Answer, Answer
+1, 0, 1, 1, condition1, BACK, BAD
+1, 1, 1, 4, condition1, BANN, BANN
+1, 2, 1, 2, condition1, BANN, BACK

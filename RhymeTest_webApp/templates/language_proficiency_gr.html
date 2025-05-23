@@ -1,0 +1,201 @@
+{% extends "layout.html" %}
+{% block content %}
+<body onload="load()">
+   <div id="mainCont" class="w3-container">
+       <p id="Prüfung der Sprachkenntnisse"></p>
+       <p id="testN">Prüfung {{ test_number }}</p>
+       <div id="audioCont" class="w3-container">
+           <figure>
+               <audio class="audio-player"
+                      controls='controls'
+                      preload="auto"
+                      controlsList="nodownload noplaybackrate"
+                      id="player"
+                      type='audio/mp3'
+                      src="{{ audio_path }}">
+                   Your browser does not support the
+                   <code>audio</code> element.
+               </audio>
+           </figure>
+       </div>
+       <div id="imageCont" class="w3-container">
+           <p question="" style="font-weight: bold; font-size: xx-large;">{{question}}</p>
+           <div class="image-grid">
+               <form method="POST" action="{{ url_for('main.language_proficiency', test_number=test_number) }}">
+                    {% for image_path in image_paths %}
+                        <button type="submit" name="user_answer" value="{{ image_path }}" class="image-button">
+                            <img src="{{ image_path }}" alt="Image" class="clickable-image">
+                        </button>
+                    {% endfor %}
+                </form>
+           </div>
+       </div>
+   </div>
+    <a href="http://www.iis.fraunhofer.de/" class="logo-link">
+        <img src="{{ url_for('static', filename='images/iis.svg') }}" class="logo" />
+    </a>
+   <style>
+       body {
+           overflow-x: hidden;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+           margin: 0;
+           background-color: #f0f0f0;
+       }
+       #mainCont {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           text-align: center;
+           width: 100%;
+           height: 100%;
+       }
+       #audioCont {
+           width: 400px;
+           margin-top: 20px;
+       }
+       #testN, #testNum, #track {
+           margin: 10px 0;
+       }
+       #testN {
+           font-size: x-large;
+           color: black;
+       }
+       #testNum, #track {
+           font-size: large;
+       }
+       #imageCont {
+           margin-top: 20px;
+           text-align: center;
+       }
+       .image-grid {
+           display: flex;
+           justify-content: space-around;
+           margin-top: 10px;
+       }
+       .clickable-image {
+           width: 227px;  /* Set the width to 227px */
+           height: 151px; /* Set the height to 151px */
+           cursor: pointer;
+           border: 2px solid transparent;
+       }
+       .clickable-image.clicked {
+           border-color: blue;
+       }
+       .audio-player {
+           width: 100%;
+           box-shadow: 0 0 20px 0 #000a;
+           font-family: sans-serif;
+           color: white;
+           font-size: 0.75em;
+       }
+       .logo-link {
+           position: absolute;
+           bottom: 20px;
+           right: 20px;
+           z-index: 10; /* Ensure logo is above other content */
+       }
+       .logo {
+           height: 50px; /* Adjust height as needed */
+           width: auto;
+       }
+        .overlay {
+            position: fixed;
+            top: 50%; /* Position overlay vertically in the middle */
+            left: 50%; /* Position overlay horizontally in the middle */
+            transform: translate(-50%, -50%); /* Center the overlay */
+            width: 80%; /* Cover 80% of the screen width */
+            max-width: 800px; /* Maximum width */
+            padding: 30px;
+            text-align: center;
+            font-size: 2rem; /* Larger text for readability */
+            font-weight: bold;
+            color: black; /* Black text for contrast */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+            z-index: 1000;
+            display: flex; /* Use flexbox to center content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .correct {
+            background-color: rgba(0, 128, 0, 0.95); /* Darker green with minimal transparency */
+        }
+
+        .incorrect {
+            background-color: rgba(200, 0, 0, 0.95); /* Darker red with minimal transparency */
+}
+   </style>
+
+   <script>
+       const correctAnswer = "{{ correct_answer.split('/')[-1] }}"; // Extract the correct answer filename
+       const currentTestNumber = {{ test_number }};
+       const showOverlay = {{ show_overlay|tojson }};  // Check if the overlay should be shown
+       const isCorrect = {{ 'true' if is_correct else 'false' }};
+       const nextTestUrl = "{{ next_test_url }}";
+
+       var time_instances = [];
+       var instant = 0;
+
+       function load() {
+           time_instances.length = 0;
+           instant = 0;
+       }
+
+       var player = document.getElementById("player");
+       player.addEventListener('play', function () {
+           instant = player.currentTime;
+           time_instances.push(instant);
+       });
+
+       window.addEventListener('keydown', function (event) {
+           var key = event.which || event.keyCode;
+           if (key === 32) { // space
+               event.preventDefault();
+               player.paused ? player.play() : player.pause();
+           }
+       });
+
+       window.onload = function() {
+           if (showOverlay) {
+               const overlay = document.createElement('div');
+               overlay.className = 'overlay';
+               // Set the overlay message and color
+                if (isCorrect) {
+                    overlay.classList.add('correct');  // Add the 'correct' class for green
+                    overlay.innerHTML = "Ihre Antwort war richtig!";
+                } else {
+                    overlay.classList.add('incorrect');  // Add the 'incorrect' class for red
+                    overlay.innerHTML = "Ihre Antwort war falsch!";
+                }
+               document.body.appendChild(overlay);
+               overlay.style.display = 'flex'; // Show the overlay
+
+               // Redirect after 2 seconds
+               setTimeout(() => {
+                   window.location.href = nextTestUrl;
+               }, 1500);
+           }
+       }
+
+   </script>
+ <script>
+  // Get all image paths from the template
+  const imagePaths = [
+    {% for image_path in image_paths %}
+      "{{ image_path }}",
+    {% endfor %}
+  ];
+
+  // Preload each image
+  imagePaths.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,9 @@
+Initial Consonants
+1.BAT-BAD-BACK-BASS-BANN-BATH
+
+Final Consonants
+2.LED-SHED-RED-BED-FED-WED
+
+Trapconditions
+3.BAT-SHED-BOND-DECK-HIT-JAWS
+
