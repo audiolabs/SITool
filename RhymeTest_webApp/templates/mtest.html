@@ -14,22 +14,22 @@
         </div>
         <div id="formCont">
             <form action="/test?f=0" method="POST" name="item0">
-                <input class="button1" name="item0" role="button" type="submit" value="{{ item[0] }}" />
+                <input class="button1" disabled name="item0" role="button" type="submit" value="{{ item[0] }}" />
             </form>
             <form action="/test?f=1" method="POST" name="item1">
-                <input class="button1" name="item1" role="button" type="submit" value="{{ item[1] }}" />
+                <input class="button1" disabled name="item1" role="button" type="submit" value="{{ item[1] }}" />
             </form>
             <form action="/test?f=2" method="POST" name="item2">
-                <input class="button1" name="item2" role="button" type="submit" value="{{ item[2] }}" />
+                <input class="button1" disabled name="item2" role="button" type="submit" value="{{ item[2] }}" />
             </form>
             <form action="/test?f=3" method="POST" name="item3">
-                <input class="button1" name="item3" role="button" type="submit" value="{{ item[3] }}" />
+                <input class="button1" disabled name="item3" role="button" type="submit" value="{{ item[3] }}" />
             </form>
             <form action="/test?f=4" method="POST" name="item4">
-                <input class="button1" name="item4" role="button" type="submit" value="{{ item[4] }}" />
+                <input class="button1" disabled name="item4" role="button" type="submit" value="{{ item[4] }}" />
             </form>
             <form action="/test?f=5" method="POST" name="item5">
-                <input class="button1" name="item5" role="button" type="submit" value="{{ item[5] }}" />
+                <input class="button1" disabled name="item5" role="button" type="submit" value="{{ item[5] }}" />
             </form>
         </div>
         {% if show_timer %}
@@ -158,6 +158,7 @@
         }
 
         var player = document.getElementById("player");
+        var buttons = document.querySelectorAll('.button1');
         player.addEventListener('play', function () {
             click += 1;
             instant = player.currentTime;
@@ -174,6 +175,9 @@
             }
         });
 
+        player.addEventListener('ended', () => {
+            buttons.forEach(btn => btn.disabled = false);
+        });
         window.addEventListener('keydown', function (event) {
             var key = event.which || event.keyCode;
             if (key === 32) {

@@ -87,10 +87,10 @@
             </div>
             <div id="formCont">
                 <form action="/trial?f=0" id="one" method="POST" name="item0">
-                    <p3><input class="button1" name="item0" role="button" type="submit" value="{{item[0]}}" /></p3>
+                    <p3><input class="button1" disabled name="item0" role="button" type="submit" value="{{item[0]}}" /></p3>
                 </form>
                 <form action="/trial?f=1" id="two" method="POST" name="item1">
-                    <p3><input class="button1" name="item1" role="button" type="submit" value="{{item[1]}}" /></p3>
+                    <p3><input class="button1" disabled name="item1" role="button" type="submit" value="{{item[1]}}" /></p3>
                 </form>
             </div>
         </div>
@@ -109,6 +109,7 @@
             }
 
             var player = document.getElementById("player");
+            var buttons = document.querySelectorAll('.button1');
             player.addEventListener('play', function () {
                 click += 1;
                 instant = player.currentTime;
@@ -123,6 +124,9 @@
                         player.muted = true;
                     }
                 }
+            });
+            player.addEventListener('ended', () => {
+                buttons.forEach(btn => btn.disabled = false);
             });
 
             window.addEventListener('keydown', function (event) {

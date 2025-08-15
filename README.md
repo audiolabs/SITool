@@ -10,8 +10,10 @@ The web application allows participants to listen to audio samples, select answe
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
 - [Language Proficiency Test](#language-proficiency-test)
+- [Performance Measurement](#performance-measurement)
 - [Evaluation & Analysis](#evaluation--analysis)
 - [Citation](#citation)
+- [References](#references)
 - [License](#license)
 - [Contact](#contact)
 
@@ -26,8 +28,8 @@ To install **SITool**, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/audiolabs/si-tool-speech-intelligibility-toolkit-for-subjective-evaluation.git
-   cd si-tool-speech-intelligibility-toolkit-for-subjective-evaluation.git
+   git clone https://github.com/audiolabs/SITool.git
+   cd SITool
    ```
 
 2. **Set up a Virtual Environment**
@@ -49,7 +51,8 @@ To install **SITool**, follow these steps:
 
 
 5. **Create Results Folders**
-   Ensure that the ```Results_DRT``` and/or ```Results_MRT``` folders exist.
+   
+   Ensure that the ```Results_DRT``` and/or ```Results_MRT``` **folders exist before running the tool**. If running on a server, verify that these directories have the necessary read/write permissions.
    
 5. **Run the Application**
 
@@ -130,9 +133,8 @@ or create your own config file.
 - **`language`**: 'en' for English version and 'gr' for German version 
 - **`testIterations`**:  Number of times the main test will be repeated for each condition 
   - Example: `For the DRT test, if 1 is selected, the audio for only one word from the word pair will be played during the test. If 2 is selected, both words in the pair will be played during the test. Similarly, for the MRT test, selecting 6 will play the audio for all six words in the set. Selecting 1 will result in only one word's audio being played during the test.` 
-- **`numberOfConditions`**: Number of conditions
 - **`testItemNumber`**:  Number of items (i.e., word pairs in case of DRT) in the test 
-- **`trapQuestions`**:  Number of trap question - These questions help to filter out non performing participants.
+- **`trapQuestions`**:  Number of trap question - These questions help to filter out non performing participants. Trap questions are only run for the "reference". The reference is always chosen as the first condition in the list in the config file.
 - **`trialIterations`**:  Number of times the trial condition is repeated - same as ```testIterations```
 - **`trialItemNumber`**:  Number of items used for the trial
 - **`trialCondition`**:  Condition used for the trial
@@ -154,7 +156,6 @@ or create your own config file.
 
    language : gr
    testIterations : 2
-   numberOfConditions : 2
    testItemNumber : 6
    trapQuestions : 2
 
@@ -223,6 +224,17 @@ Structure of the Language Proficiency Test was adapted from [Cambridge Listening
 - ```correctResponse```: Filenames of correct images.
 - ```maxIncorrectAnswers```: Maximum number of incorrect answers allowed.
 
+## Performance Measurement
+As per [ANSI standard](#references):
+
+```performance_value = (R - W / (num_response_alternatives - 1)) / (R + W) * 100```
+
+where:
+- R = Number of correct responses
+- W = Number of incorrect responses
+- num_response_alternatives = 2 for DRT and 6 for MRT 
+- ```R - (W / (num_response_alternatives - 1))``` gives the number of correct answers after adjusting for chance guessing.
+
 ## Evaluation & Analysis
 
 The ```Evaluation/``` folder contains tools to help you visualize and interpret test results.
@@ -241,12 +253,16 @@ The ```Evaluation/``` folder contains tools to help you visualize and interpret 
 
 Dummy result data is provided to help you explore the analysis pipeline.
 
+
 ## Citation
 
 If you use SITool in academic work, please cite: 
 
 ```bash
 ```
+
+## References
+- ANSI-ASA S3. 2, “Method for Measuring the Intelligibility of Speech Over Communication Systems”, American National Standards Institute New York, 2009.
 
 ## License 
 

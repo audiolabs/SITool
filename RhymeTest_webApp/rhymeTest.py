@@ -270,7 +270,7 @@ class RhymeTest:
             last_condition = list(correctResponses.keys())[-1]
             R = correctResponses[last_condition]['Overall']['R']
             W = correctResponses[last_condition]['Overall']['W']
-            return (R - W * (num_response_alternatives-1)) / (R + W) * 100
+            return (R - W / (num_response_alternatives-1)) / (R + W) * 100
 
         # Handle language format
         lang = lang.split(',')[1] if ',' in lang else lang
@@ -288,17 +288,13 @@ class RhymeTest:
                 header = ["Subject Name",'completion_code', 'user_id', 'Gender', 'Age', "Native", "Condition"]
                 row = [subject_name,code, user_id, gender, age, lang, condition]
 
-                for i, duration in enumerate(durations):
-                    header.append(f"Test-{i + 1}(Sec)")
-                    row.append(duration)
-
                 for feature in correctResponses[condition]:
                     R = correctResponses[condition][feature]['R']
                     W = correctResponses[condition][feature]['W']
                     if R+W == 0:
                         performance_value = 0
                     else:
-                        performance_value = (R - W * (num_response_alternatives - 1)) / (R + W) * 100
+                        performance_value = (R - W / (num_response_alternatives - 1)) / (R + W) * 100
                     row.append(performance_value)
                     header.append(f"{feature} Performance (%)" if feature != "Overall" else "Overall Performance (%)")
 

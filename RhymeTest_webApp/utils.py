@@ -25,7 +25,7 @@ def validate_config(config):
     Ensures required keys are present and correctly formatted.
     """
     required_keys = [
-        'testIterations', 'numberOfConditions', 'testItemNumber', 'testName',
+        'testIterations', 'testItemNumber', 'testName',
         'trialIterations', 'trialItemNumber', 'trialCondition', 'trialAudioDirectory',
         'conditions', 'answer_dir', 'consent_info', 'break','trapQuestions','language'
     ]

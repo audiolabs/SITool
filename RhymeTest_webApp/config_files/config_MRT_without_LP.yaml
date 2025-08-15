@@ -2,7 +2,6 @@ testName: MRT TEST
 
 language : en
 testIterations : 6
-numberOfConditions : 2
 testItemNumber : 2
 trapQuestions : 1
 trialIterations: 3

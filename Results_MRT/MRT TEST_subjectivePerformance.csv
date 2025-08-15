@@ -1,9 +1,9 @@
-Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Test-1(Sec),Test-2(Sec),Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
-ABC,57437,123,Female,23,UK,condition1,10.28439,8.998232,-500.0,-400.0,-450.0,-450.0
-ABC,57437,123,Female,23,UK,condition2,10.28439,8.998232,-400.0,-500.0,0,-450.0
-Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Test-1(Sec),Test-2(Sec),Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
-XYZ,77498,233,Female,33,UK,condition1,8.456912,8.173113,-400.0,-500.0,-350.0,-450.0
-XYZ,77498,233,Female,33,UK,condition2,8.456912,8.173113,-400.0,-400.0,0,-400.0
-Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Test-1(Sec),Test-2(Sec),Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
-AAA,51020,6666,Female,55,UK,condition1,5.542199,7.201158,-400.0,-500.0,-350.0,-450.0
-AAA,51020,6666,Female,55,UK,condition2,5.542199,7.201158,-300.0,-300.0,0,-300.0
+Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
+ABC,57437,123,Female,23,UK,condition1,-500,-400,-450,-450
+ABC,57437,123,Female,23,UK,condition2,-400,-500,0,-450
+Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
+XYZ,77498,233,Female,33,UK,condition1,-400,-500,-350,-450
+XYZ,77498,233,Female,33,UK,condition2,-400,-400,0,-400
+Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
+AAA,51020,6666,Female,55,UK,condition1,-400,-500,-350,-450
+AAA,51020,6666,Female,55,UK,condition2,-300,-300,0,-300

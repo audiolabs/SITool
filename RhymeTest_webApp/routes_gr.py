@@ -56,7 +56,7 @@ def initialize():
         if current_app.config.get("DRT"):
             session['user_data']['method'] = DRT(current_app.config['testIterations'],
                                                  current_app.config['testItemNumber'],
-                                                 current_app.config['numberOfConditions'],
+                                                 len(current_app.config['conditions']),
                                                  current_app.config['testName'],
                                                  current_app.config['trapQuestions'])
             session['user_data']['trial'] = DRT(current_app.config['trialIterations'],
@@ -67,7 +67,7 @@ def initialize():
         elif current_app.config.get('MRT'):
             session['user_data']['method'] = MRT(current_app.config['testIterations'],
                                                  current_app.config['testItemNumber'],
-                                                 current_app.config['numberOfConditions'],
+                                                 len(current_app.config['conditions']),
                                                  current_app.config['testName'],
                                                  current_app.config['trapQuestions'])
             session['user_data']['trial'] = MRT(current_app.config['trialIterations'],
@@ -283,7 +283,7 @@ def test():
                                    currentItem=session['user_data']['current_index'],
                                    overall=session['user_data']['overall'],
                                    test_number=session['user_data']['current_test'],
-                                   numberOfConditions=current_app.config['numberOfConditions'],
+                                   numberOfConditions=len(current_app.config['conditions']),
                                    test=current_app.config['testName'],
                                    show_timer=show_timer)
         else:
@@ -291,7 +291,7 @@ def test():
             session['user_data']['durations'].append((session['user_data']['end_time'] -
                                                       session['user_data']['start_time']).total_seconds())
             session['user_data']['start_timer'] = True
-            if session['user_data']['condition_index'] == current_app.config['numberOfConditions'] - 1:
+            if session['user_data']['condition_index'] == len(current_app.config['conditions']) - 1:
                 session['user_data']['method'].calculatePerformance(session['user_data']['subject_name'],
                                                                     session['user_data']['code'],
                                                                     session['user_data']['user_id'],
@@ -322,7 +322,7 @@ def test():
                 audioDirectory = current_app.config[current_app.config['key']]['audioDirectory'][condition_index] + f"/{current_app.config['conditions'][condition_index]}/{current_app.config['conditions'][condition_index]}_{wordItemIndex}_{wordIndex}.wav"
 
                 if current_app.config["break"]:
-                    halfway_point = current_app.config["numberOfConditions"] // 2
+                    halfway_point = len(current_app.config['conditions']) // 2
                     show_timer = session['user_data']['current_test'] == halfway_point + 1
 
                 return render_template(current_app.config['testHTML'],
@@ -333,7 +333,7 @@ def test():
                                        overall=session['user_data']['overall'],
                                        test=current_app.config['testName'],
                                        test_number=session['user_data']['current_test'],
-                                       numberOfConditions=current_app.config['numberOfConditions'],
+                                       numberOfConditions=len(current_app.config['conditions']),
                                        show_timer=show_timer)
     else:
         return render_template('home_gr.html',

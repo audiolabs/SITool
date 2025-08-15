@@ -1,10 +1,9 @@
 testName: DRT TEST
 
 language : en
-testIterations : 2
-numberOfConditions : 2
+testIterations : 1
 testItemNumber : 6
-trapQuestions : 2
+trapQuestions : 1
 
 trialIterations: 1
 trialItemNumber: 2

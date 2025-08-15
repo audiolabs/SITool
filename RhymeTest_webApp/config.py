@@ -11,7 +11,7 @@ class Config:
     LOGGING_FORMAT = '%(asctime)s - %(levelname)s - %(message)s'
 
     # Hardcode the path to the configuration file
-    CONFIG_FILE_PATH = "./RhymeTest_webApp/config_files/config_DRT_without_LP.yaml"
+    CONFIG_FILE_PATH = "./RhymeTest_webApp/config_files/config_MRT_without_LP.yaml"
 
 
 class DevelopmentConfig(Config):

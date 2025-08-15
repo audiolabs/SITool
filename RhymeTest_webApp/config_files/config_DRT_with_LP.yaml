@@ -2,7 +2,6 @@ testName: DRT TEST
 
 language : en
 testIterations : 2
-numberOfConditions : 2
 testItemNumber : 6
 trapQuestions : 2
 
