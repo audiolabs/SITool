@@ -9,6 +9,7 @@ import seaborn as sns
 # ====== SELECT TEST TYPE HERE ======
 test_type = "MRT"  # Change to "MRT" when needed
 result_folder = f'../Results_{test_type}'
+folder_path = '../Evaluation/Plots'
 result_files = glob.glob(os.path.join(result_folder,'*.csv'))
 if len(result_files) == 1:
     file_path = result_files[0]
@@ -30,7 +31,7 @@ for condition in conditions:
     box_values.append(overall_accuracy)
 
 plot_name = f'Boxplot_{test_type}.png'
-plot_path = os.path.join(result_folder,plot_name)
+plot_path = os.path.join(folder_path,plot_name)
 plt.figure(figsize=(10, 6))
 plt.boxplot(box_values, labels=conditions, patch_artist=True)
 plt.title(f'Box Plot of Overall Accuracy Across Conditions ({test_type})')
@@ -66,7 +67,7 @@ heatmap_data = {
 df_heatmap = pd.DataFrame(heatmap_data, index=features) / 100
 
 plot_name = f'Heatmap_{test_type}.png'
-plot_path = os.path.join(result_folder,plot_name)
+plot_path = os.path.join(folder_path,plot_name)
 plt.figure(figsize=(11, 10))
 sns.heatmap(df_heatmap, annot=True, cmap="coolwarm", linewidths=.5, cbar_kws={'label': 'Accuracy'})
 plt.xlabel('Conditions')

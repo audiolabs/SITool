@@ -1,0 +1,4 @@
+Test Number, Trial Number, Item Index, Word Index, Condition, Correct Answer, Answer
+1, 0, 1, 2, condition1, BACK, BACK
+1, 1, 1, 3, condition1, BASS, BASS
+1, 2, 1, 5, condition1, BATH, BATH

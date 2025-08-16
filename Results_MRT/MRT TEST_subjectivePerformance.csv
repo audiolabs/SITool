@@ -1,9 +1,9 @@
 Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
-ABC,57437,123,Female,23,UK,condition1,-500,-400,-450,-450
-ABC,57437,123,Female,23,UK,condition2,-400,-500,0,-450
+A,76539,123,Female,23,UK,condition2,60.0,80.0,0,70.0
+A,76539,123,Female,23,UK,condition1,60.0,100.0,90.0,80.0
 Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
-XYZ,77498,233,Female,33,UK,condition1,-400,-500,-350,-450
-XYZ,77498,233,Female,33,UK,condition2,-400,-400,0,-400
+B,87305,123,Female,23,UK,condition1,100.0,80.0,90.0,90.0
+B,87305,123,Female,23,UK,condition2,60.0,80.0,0,70.0
 Subject Name,completion_code,user_id,Gender,Age,Native,Condition,Initial Consonants Performance (%),Final Consonants Performance (%),Trapconditions Performance (%),Overall Performance (%)
-AAA,51020,6666,Female,55,UK,condition1,-400,-500,-350,-450
-AAA,51020,6666,Female,55,UK,condition2,-300,-300,0,-300
+C,70176,123,Female,23,UK,condition1,40.0,100.0,90.0,70.0
+C,70176,123,Female,23,UK,condition2,60.0,60.0,0,60.0
