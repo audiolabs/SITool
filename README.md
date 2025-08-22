@@ -259,6 +259,18 @@ Dummy result data is provided to help you explore the analysis pipeline.
 If you use SITool in academic work, please cite: 
 
 ```bash
+Leschanowsky, A., Kayyar Lakshminarayana, K., Rajasekhar, A., Behringer, L., Kilinc, I., Fuchs, G., Habets, E.A.P. (2025) Benchmarking Neural Speech Codec Intelligibility with SITool. Proc. Interspeech 2025, 5488-5492, doi: 10.21437/Interspeech.2025-984
+```
+```bash
+@inproceedings{leschanowsky25_interspeech,
+  title     = {{Benchmarking Neural Speech Codec Intelligibility with SITool}},
+  author    = {{Anna Leschanowsky and Kishor {Kayyar Lakshminarayana} and Anjana Rajasekhar and Lyonel Behringer and Ibrahim Kilinc and Guillaume Fuchs and Emanuël A. P. Habets}},
+  year      = {{2025}},
+  booktitle = {{Interspeech 2025}},
+  pages     = {{5488--5492}},
+  doi       = {{10.21437/Interspeech.2025-984}},
+  issn      = {{2958-1796}},
+}
 ```
 
 ## References
